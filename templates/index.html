@@ -1762,12 +1762,15 @@
     }
 </script>
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <script type="text/javascript">
     $(function() {
       $('td').on('click', function(e) {
         e.preventDefault()
-        $.getJSON('/click',
+        $.getJSON('/test',
             function(data) {
+                console.log("Test")
           //do nothing
         });
         return false;
