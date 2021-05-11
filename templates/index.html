@@ -1748,12 +1748,19 @@
     </tbody>
 </table>
 
+<!-- Scripts for jquery and socketio -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
+
+
 <script>
+    // Updates css when cell is clicked
     function pressed(cell){
         cell.classList.add("wall");
         cell.classList.remove("unvisited");
     }
 
+    // Allows css to be updated when cell is clicked, also triggers backend ajax call
     var table = document.getElementById('grid');
     var cells = table.getElementsByTagName("td"); 
     for (var i = 0; i < cells.length; i++) { 
@@ -1762,21 +1769,21 @@
     }
 </script>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-<script type="text/javascript">
-    $(function() {
-      $('td').on('click', function(e) {
-        e.preventDefault()
-        $.getJSON('/test',
-            function(data) {
-                console.log("Test")
-          //do nothing
-        });
-        return false;
-      });
-    });
+<script>
+    
+    var socket = io.connect('http://127.0.0.1:5000')
+
+    // Run when we need to change a block on the front end
+    socket.on('change_block_on_frontend', function(data) {
+        cellToChange = getElementById(data.ID)
+        cellToChange.className(data.type)
+    })
 </script>
+
+<script>
+</script>
+
 
 
 
