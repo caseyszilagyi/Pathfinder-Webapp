@@ -1783,9 +1783,11 @@
         // Run when we need to change a block on the front end
         socket.on('change_cell', function(data) {
             socket.emit('test', {'ID': data["ID"]} );
-            cellToChange = getElementById(data["ID"]);
+            cellToChange = document.getElementById(data["ID"]);
+            socket.emit('test', {'ID': cellToChange.getAttribute('id')} );
             //socket.emit('test', {'ID': cellToChange.getAttribute('id')} );
-            cellToChange.className(data["type"]);
+            cellToChange.classList.remove(...cellToChange.classList);
+            cellToChange.classList.add(data["type"]);
         })
 
         // Click event for start button
