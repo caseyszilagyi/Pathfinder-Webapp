@@ -13,27 +13,31 @@ socketio = SocketIO(app)
 def index():
     return render_template("index.html")
 
-@app.route('/test')
+@app.route('/boxclick')
 def clickOnBox():
-    print('box click call')
+    print('box click call', file=sys.stderr)
     return ("nothing")
 
 @app.route('/update_block', methods = ['POST'])
 def updateBlock():
-    print('update block', file=sys.stderr)
+    print('Update block', file=sys.stderr)
 
-@socketio.on('change_block_on_frontend')
-def changeBlock(blockID, changeType):
-    print("change block")
-    data = {}
-    data['ID'] = blockID
-    data['type'] = changeType
-    json_data = json.dumps(data)
-    emit('change_block_on_frontend', data = json_data)
+@socketio.on('start')
+def start_program():
+    print('Started program', file=sys.stderr)
+    change_cell("5:5", "visited")
+
+@socketio.on('test')
+def test(data):
+    print("Test Callback, data: " + data["ID"], file=sys.stderr)
+
+
+def change_cell(blockID, changeType):
+    print("Change cell start")
+    emit('change_cell', {'ID': blockID, 'type': changeType})
+    print("Change cell end")
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)
     #app.run(debug=True)
 
-
-#changeBlock("5:5", "visited")
