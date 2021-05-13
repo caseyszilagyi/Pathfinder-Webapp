@@ -22,20 +22,28 @@ def clickOnBox():
 def updateBlock():
     print('Update block', file=sys.stderr)
 
+
+# Run when the start button is pressed
 @socketio.on('start')
 def start_program():
     print('Started program', file=sys.stderr)
-    change_cell("5:5", "visited")
+    change_cell(5, 5, "visited")
 
+# Call this method to change the cell to a different type
+# Currently implemented types are unvisited, visited, wall, path
+def change_cell(x, y, changeType):
+    blockID = str(y) + ":" + str(x)
+    print("Change cell start")
+    emit('change_cell', {'ID': blockID, 'type': changeType})
+    print("Change cell end")
+
+
+# Test method
 @socketio.on('test')
 def test(data):
     print("Test Callback, data: " + data["ID"], file=sys.stderr)
 
 
-def change_cell(blockID, changeType):
-    print("Change cell start")
-    emit('change_cell', {'ID': blockID, 'type': changeType})
-    print("Change cell end")
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)
