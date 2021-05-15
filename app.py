@@ -38,9 +38,10 @@ def updateBlock():
 def start_program():
     print('Started program', file=sys.stderr)
 
-    main.initialize(28, 60)
-    main.setstart(1,3)
-    main.setend(21,35)
+    main.initialize(60, 28)
+    main.setstart(58, 25)
+    main.setend(15,15)
+
 
     visitedlist = main.calculateDistancesfrom()
     pathlist, finaldistance = main.getDijkstraPathTo()
@@ -55,7 +56,8 @@ def start_program():
                 y = tile.gety()
 
                 change_cell_coords(x,y,"visited")
-                visitedlist.remove(tile)
+                templist = visitedlist.remove(tile)
+                visitedlist = templist
         currentdistancevisited += 1
         time.sleep(0.5)
 
