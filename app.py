@@ -2,9 +2,12 @@ from flask import Flask, render_template, url_for
 from flask_socketio import SocketIO, send, emit
 import json
 import sys
+
+import main
+import tile
+
+
 import logging
-#import main
-#import tile
 import time
 logging.basicConfig(level=logging.DEBUG)
 
@@ -35,12 +38,12 @@ def updateBlock():
 def start_program():
     print('Started program', file=sys.stderr)
 
-    initialize(28, 60)
-    set_start(1,3)
-    set_end(21,35)
+    main.initialize(28, 60)
+    main.setstart(1,3)
+    main.setend(21,35)
 
-    visitedlist = calculateDistancesfrom()
-    pathlist, finaldistance = getDijkstraPathTo()
+    visitedlist = main.calculateDistancesfrom()
+    pathlist, finaldistance = main.getDijkstraPathTo()
 
     currentdistancevisited = 0
 
@@ -51,7 +54,7 @@ def start_program():
                 x = tile.getx()
                 y = tile.gety()
 
-                change_cell_coords(x,y,visited)
+                change_cell_coords(x,y,"visited")
                 visitedlist.remove(tile)
         currentdistancevisited += 1
         time.sleep(0.5)
@@ -60,7 +63,7 @@ def start_program():
         x = tile.getx()
         y = tile.gety()
 
-        change_cell_coords(x,y,path)
+        change_cell_coords(x,y,"path")
 
 
 
@@ -69,10 +72,10 @@ def start_program():
 @socketio.on('change_cell')
 def change_cell_frontend(data):
     change_cell(data['ID'], data['type']);
-    coordinates = 'ID'.split(':')
+    coordinates = data['ID'].split(':')
     x = int(coordinates[0])
     y = int(coordinates[1])
-    createwall(x,y)
+    main.create_wall(x,y)
 
 # Call this method to change the cell to a different type. Calls method below by converting coordinates to proper format
 # Currently implemented types are unvisited, visited, wall, path
