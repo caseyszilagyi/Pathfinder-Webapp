@@ -5,22 +5,13 @@ import sys
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
-
 app = Flask(__name__)
 socketio = SocketIO(app)
 
+# Loads the page
 @app.route('/')
 def index():
     return render_template("index.html")
-
-@app.route('/boxclick')
-def clickOnBox():
-    print('box click call', file=sys.stderr)
-    return ("nothing")
-
-@app.route('/update_block', methods = ['POST'])
-def updateBlock():
-    print('Update block', file=sys.stderr)
 
 
 # Run when the start button is pressed
@@ -41,7 +32,7 @@ def change_cell_coords(x, y, changeType):
     blockID = str(y) + ":" + str(x)
     change_cell(blockID, changeType)
 
-## Called by the method above, actually will change the cell display on the front end
+## Called by the method above, will actually change the cell display on the front end
 def change_cell(blockID, changeType):
     print("Change cell start")
     emit('change_cell', {'ID': blockID, 'type': changeType})
