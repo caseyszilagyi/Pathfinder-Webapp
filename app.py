@@ -3,8 +3,8 @@ from flask_socketio import SocketIO, send, emit
 import json
 import sys
 import logging
-import main
-import tile
+#import main
+#import tile
 import time
 logging.basicConfig(level=logging.DEBUG)
 
