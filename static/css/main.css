@@ -1,13 +1,19 @@
-body {
+body,html {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 54;
+    padding:0;
+}
+.container {
+    box-sizing: border-box;
+}
+
+table {
+    height:84vh;
+    width: 100vw;
 }
 
 td {
     outline: 1px solid black;
-    height: 20px;
-    width: 20px;
+    width: 1.66%;
 }
 .unvisited{
     background: white;
@@ -20,4 +26,23 @@ td {
 }
 .path {
     background: yellow;
+}
+
+
+#toolbar {
+    height: 16vh;
+}
+
+
+button {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 40px;
+    padding: 15px;
+    border-radius: 15px;
+    display: block;
+    margin: auto;
+}
+#start {
+    background-color: #080;
+    color: white;
 }
