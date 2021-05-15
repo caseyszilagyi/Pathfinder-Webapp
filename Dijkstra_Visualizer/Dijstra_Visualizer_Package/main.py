@@ -5,9 +5,7 @@ tilelist = []
 starttile = None
 endtile = None
 
-def calculateDistancesfrom(startx, starty):
-
-    setstart(startx, starty)
+def calculateDistancesfrom():
 
     tilequeue = queue.Queue()
     visitedlist = []
@@ -43,12 +41,10 @@ def calculateDistancesfrom(startx, starty):
 
     return visitedlist
 
-def getDijkstraPathTo(endx, endy):
-
-    setend(endx, endy)
+def getDijkstraPathTo():
 
     temp = endtile
-
+    finaldistance = endtile.getdistance()
 
     pathlist = []
 
@@ -62,7 +58,7 @@ def getDijkstraPathTo(endx, endy):
     list.reverse(pathlist)
 
 
-    return pathlist
+    return pathlist,finaldistance
 
 def initialize(gridwidth, gridheight):
 
@@ -136,6 +132,6 @@ def setend(endx, endy):
 def create_wall(x,y):
     for currenttile in tilelist:
         if (currenttile.getx() == x and currenttile.gety() == y):
-            currenttile.setwall(true)
+            currenttile.setwall(True)
 
     return
