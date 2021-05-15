@@ -3,11 +3,16 @@ from flask_socketio import SocketIO, send, emit
 import json
 import sys
 import logging
+import main
+import tile
+import time
 logging.basicConfig(level=logging.DEBUG)
 
 
 app = Flask(__name__)
 socketio = SocketIO(app)
+
+
 
 @app.route('/')
 def index():
@@ -25,23 +30,59 @@ def updateBlock():
 
 # Run when the start button is pressed
 @socketio.on('start')
+
+#def start_program(startx, starty, endx, endy):
 def start_program():
     print('Started program', file=sys.stderr)
-    change_cell_coords(5, 5, "visited")
+
+    initialize(28, 60)
+    set_start(1,3)
+    set_end(21,35)
+
+    visitedlist = calculateDistancesfrom()
+    pathlist, finaldistance = getDijkstraPathTo()
+
+    currentdistancevisited = 0
+
+    while currentdistancevisited < finaldistance+1:
+
+        for tile in visitedlist:
+            if tile.getdistance() == currentdistancevisited:
+                x = tile.getx()
+                y = tile.gety()
+
+                change_cell_coords(x,y,visited)
+                visitedlist.remove(tile)
+        currentdistancevisited += 1
+        time.sleep(0.5)
+
+    for tile in pathlist:
+        x = tile.getx()
+        y = tile.gety()
+
+        change_cell_coords(x,y,path)
+
 
 
 # Called from the front end to change a cell
+# Called by the front end to change cell to a wall
 @socketio.on('change_cell')
 def change_cell_frontend(data):
     change_cell(data['ID'], data['type']);
+    coordinates = 'ID'.split(':')
+    x = int(coordinates[0])
+    y = int(coordinates[1])
+    createwall(x,y)
 
 # Call this method to change the cell to a different type. Calls method below by converting coordinates to proper format
 # Currently implemented types are unvisited, visited, wall, path
+
 def change_cell_coords(x, y, changeType):
     blockID = str(y) + ":" + str(x)
     change_cell(blockID, changeType)
 
 ## Called by the method above, actually will change the cell display on the front end
+# Called by the other methods to send to the front end
 def change_cell(blockID, changeType):
     print("Change cell start")
     emit('change_cell', {'ID': blockID, 'type': changeType})
@@ -58,4 +99,10 @@ def test(data):
 if __name__ == "__main__":
     socketio.run(app, debug=True)
     #app.run(debug=True)
+
+def set_end(x,y):
+    setstart(x,y)
+
+def set_start(x,y):
+    setend(x,y)
 
