@@ -1,25 +1,31 @@
 body,html {
     margin: 0;
     padding:0;
+    height: 100vh;
+    width: 100vw;
+    
 }
 .container {
     box-sizing: border-box;
 }
 
 table {
-    height:84vh;
-    width: 100vw;
+    height:86%;
+    width: 100%;
 }
 
 td {
-    outline: 1px solid black;
+    outline: 0.5px solid rgb(160, 160, 160);
     width: 1.66%;
 }
 .unvisited{
     background: white;
 }
+.unvisited:hover{
+    background: lightgray;
+}
 .visited{
-    background: green;
+    background: rgb(84, 197, 250);
 }
 .wall {
     background: black;
@@ -30,19 +36,38 @@ td {
 
 
 #toolbar {
-    height: 16vh;
+    height: 14%;
+    line-height: 14%;
+    display: flex;
+    align-items: center;
 }
 
 
 button {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 40px;
-    padding: 15px;
+    height: 80%;
+    border: black;
+    border-width:1px;
+    font-size: 5vh;
+    line-height: 50%;
+    align-items: center;
     border-radius: 15px;
-    display: block;
-    margin: auto;
+    padding-left: 3%;
+    padding-right: 3%;
+    margin-left: 1.5%;
+    margin-right: 1.5%;
 }
 #start {
-    background-color: #080;
+    background-color: rgb(0, 175, 0);
     color: white;
+}
+#start:hover{
+    background-color: rgb(0, 215, 0);
+}
+#reset {
+    background-color: rgb(185, 0, 0);
+    color: white;
+}
+#reset:hover{
+    background-color: rgb(235, 0, 0);
 }
