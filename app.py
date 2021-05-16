@@ -56,8 +56,7 @@ def start_program():
                 y = tile.gety()
 
                 change_cell_coords(x,y,"visited")
-                templist = visitedlist.remove(tile)
-                visitedlist = templist
+                visitedlist.remove(tile)
         currentdistancevisited += 1
         time.sleep(0.5)
 
