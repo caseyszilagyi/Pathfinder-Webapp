@@ -42,9 +42,12 @@ def start_program():
     main.setstart(58, 25)
     main.setend(15,15)
 
-
+    print("CALCULATEDISTANCESFROM Start")
     visitedlist = main.calculateDistancesfrom()
+    print("CALCULATEDISTANCESFROM End")
+    print("GETDIJKSTRA Start")
     pathlist, finaldistance = main.getDijkstraPathTo()
+    print("GETDIJKSTRA End")
 
     currentdistancevisited = 0
 

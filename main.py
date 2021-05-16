@@ -13,7 +13,6 @@ def calculateDistancesfrom():
 
         nonwall.setdistance(float('inf'))
         nonwall.setvisited(False)
-        tilequeue.put(nonwall)
 
     starttile.setdistance(0)
     starttile.setprev(None)
