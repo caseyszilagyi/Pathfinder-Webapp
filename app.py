@@ -56,7 +56,6 @@ def start_program():
                 y = tile.gety()
 
                 change_cell_coords(x,y,"visited")
-                visitedlist.remove(tile)
         currentdistancevisited += 1
         time.sleep(0.1)
 
@@ -72,11 +71,11 @@ def start_program():
 # Called by the front end to change cell to a wall
 @socketio.on('change_cell')
 def change_cell_frontend(data):
-    change_cell(data['ID'], data['type']);
+    change_cell(data['ID'], data['type'])
     coordinates = data['ID'].split(':')
-    x = int(coordinates[0])
+    x = int(coordinates[1])
     print("Wall X coord: ", x)
-    y = int(coordinates[1])
+    y = int(coordinates[0])
     print("Wall Y coord: ",y)
     main.create_wall(x,y)
 
