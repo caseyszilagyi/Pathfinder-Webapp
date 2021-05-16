@@ -39,19 +39,16 @@ def start_program():
     print('Started program', file=sys.stderr)
 
     main.initialize(60, 28)
-    main.setstart(58, 25)
+    main.setstart(50, 25)
     main.setend(15,15)
 
-    print("CALCULATEDISTANCESFROM Start")
+
     visitedlist = main.calculateDistancesfrom()
-    print("CALCULATEDISTANCESFROM End")
-    print("GETDIJKSTRA Start")
     pathlist, finaldistance = main.getDijkstraPathTo()
-    print("GETDIJKSTRA End")
 
     currentdistancevisited = 0
 
-    while currentdistancevisited < finaldistance+1:
+    while currentdistancevisited < finaldistance:
 
         for tile in visitedlist:
             if tile.getdistance() == currentdistancevisited:
@@ -61,7 +58,7 @@ def start_program():
                 change_cell_coords(x,y,"visited")
                 visitedlist.remove(tile)
         currentdistancevisited += 1
-        time.sleep(0.5)
+        time.sleep(0.1)
 
     for tile in pathlist:
         x = tile.getx()
@@ -78,7 +75,9 @@ def change_cell_frontend(data):
     change_cell(data['ID'], data['type']);
     coordinates = data['ID'].split(':')
     x = int(coordinates[0])
+    print("Wall X coord: ", x)
     y = int(coordinates[1])
+    print("Wall Y coord: ",y)
     main.create_wall(x,y)
 
 # Call this method to change the cell to a different type. Calls method below by converting coordinates to proper format

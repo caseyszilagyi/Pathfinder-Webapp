@@ -8,6 +8,7 @@ endtile = None
 def calculateDistancesfrom():
 
     tilequeue = queue.Queue()
+    visitedlist = []
 
     for nonwall in tilelist:
 
@@ -22,6 +23,7 @@ def calculateDistancesfrom():
     while tilequeue.qsize() != 0:
 
         currenttile = tilequeue.get()
+        visitedlist.append(currenttile)
         currenttiledistance = currenttile.getdistance()
         adjacencylist = currenttile.getadjacencylist()
 
@@ -34,7 +36,7 @@ def calculateDistancesfrom():
                 adjacenttile.setdistance(currenttiledistance + 1)
                 adjacenttile.setprev(currenttile)
                 tilequeue.put(adjacenttile)
-    return tilelist
+    return visitedlist
 
 def getDijkstraPathTo():
 

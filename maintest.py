@@ -2,9 +2,9 @@ from main import *
 from tile import *
 
 tilelist = initialize(60,28)
-setstart(10,10)
-setend(20,20)
-calculateDistancesfrom()
+setstart(50, 25)
+setend(15,15)
+y = calculateDistancesfrom()
 
 tile1adjacencylist = tilelist[119].getadjacencylist()
 
@@ -24,3 +24,10 @@ for current in shortestpath:
     xcoordinate = current.getx()
     ycoordinate = current.gety()
     print("(",xcoordinate, ", ", ycoordinate,")")
+print("\n")
+for tile in y:
+    xcoord = tile.getx()
+    ycoord = tile.gety()
+    distance = tile.getdistance()
+    iswall = tile.getwall()
+    print("(",xcoord, ", ", ycoord,")"," Distance: ", distance, " Wall: ", iswall)
