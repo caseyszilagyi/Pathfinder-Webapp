@@ -62,6 +62,7 @@ def start_program():
         y = tile.gety()
 
         change_cell_coords(x,y,"path")
+        time.sleep(0.02)
 
 
 
