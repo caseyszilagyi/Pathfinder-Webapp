@@ -1781,8 +1781,8 @@
         for (var i = 0; i < cells.length; i++) { 
             CurrCell = cells[i];
             CurrCell.addEventListener("click", pressed.bind(this, CurrCell));
-            CurrCell.addEventListener("ondragover", allowDrop.bind(event));
-            CurrCell.addEventListener("ondrop", drop.bind(event));
+            CurrCell.addEventListener("dragover", allowDrop.bind(event));
+            CurrCell.addEventListener("drop", drop.bind(event));
         }
 
         // Click event for start button
@@ -1803,16 +1803,16 @@
     }
 
     function dragStart(event, draggedID){
-        event.dataTransfer.setData("text", "heyo");
-        console.log(draggedID);
         elementID = draggedID;
+        console.log("dragStart " + draggedID);
         console.log(event);
+        event.dataTransfer.setData("text", null);
     }
 
     function drop(event){
-        console.log("yo");
         event.preventDefault();
-        console.log(target.getAttribute("id"));
+        console.log("drop");
+        console.log(event.target.getAttribute("id"));
         element = document.getElementById(elementID);
         event.target.appendChild(element);
         
