@@ -10,13 +10,14 @@ body,html {
 }
 
 table {
-    height:86%;
+    height: 86%;
     width: 100%;
 }
 
 td {
     outline: 0.5px solid rgb(160, 160, 160);
     width: 1.66%;
+    height: 2%;
 }
 .unvisited{
     background: white;
@@ -70,4 +71,10 @@ button {
 }
 #reset:hover{
     background-color: rgb(235, 0, 0);
+}
+
+
+#startpos{
+    width: 100%;
+    height: auto;
 }

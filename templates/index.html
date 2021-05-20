@@ -883,7 +883,8 @@
         </tr>  
         <tr id="row14">
             <td id="14:0" class="unvisited"></td>
-            <td id="14:1" class="unvisited"></td>
+            <td id="14:1" class="unvisited"><img src="{{ url_for('static', filename = 'images/start.jpg') }}" id="startpos" 
+                ondragstart = "dragStart(event, 'startpos')" draggable="true"></td>
             <td id="14:2" class="unvisited"></td>
             <td id="14:3" class="unvisited"></td>
             <td id="14:4" class="unvisited"></td>
@@ -1778,14 +1779,45 @@
         var table = document.getElementById('grid');
         var cells = table.getElementsByTagName("td"); 
         for (var i = 0; i < cells.length; i++) { 
-            cells[i].addEventListener("click", pressed.bind(this, cells[i]));
+            CurrCell = cells[i];
+            CurrCell.addEventListener("click", pressed.bind(this, CurrCell));
+            CurrCell.addEventListener("ondragover", allowDrop.bind(event));
+            CurrCell.addEventListener("ondrop", drop.bind(event));
         }
 
         // Click event for start button
         $('#start').on('click', function(){
             socket.emit('start');
         })
+
     })    
+</script>
+
+<script>
+    var element = document.createElement('div');
+    var elementID;
+
+    // Dragging boxes events
+    function allowDrop(event){
+        event.preventDefault();
+    }
+
+    function dragStart(event, draggedID){
+        event.dataTransfer.setData("text", "heyo");
+        console.log(draggedID);
+        elementID = draggedID;
+        console.log(event);
+    }
+
+    function drop(event){
+        console.log("yo");
+        event.preventDefault();
+        console.log(target.getAttribute("id"));
+        element = document.getElementById(elementID);
+        event.target.appendChild(element);
+        
+    }
+
 </script>
 
 
