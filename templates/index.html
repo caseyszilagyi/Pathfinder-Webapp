@@ -1760,7 +1760,7 @@
         // Connecting to socket
         var socket = io.connect('http://127.0.0.1:5000');
         socket.on('connect', function(){
-            socket.send('user has connected');
+            socket.send('User has connected');
         })
 
         // Listener for cell change calls
@@ -1772,25 +1772,25 @@
 
         // Changes to wall when cell is clicked
         function pressed(cell){
-            socket.emit('change_cell', 
+            socket.emit('make_wall', 
             {'ID': cell.getAttribute("id"), 'type': "wall"} );
         }
 
-        // Binds pressed call (function above) for clicks on cells
+        // Binds pressed call (function above) for clicks on cells. Also implements
+        // drag and drop event listeners
         var table = document.getElementById('grid');
         var cells = table.getElementsByTagName("td"); 
         for (var i = 0; i < cells.length; i++) { 
-            CurrCell = cells[i];
-            CurrCell.addEventListener("click", pressed.bind(this, CurrCell));
-            CurrCell.addEventListener("dragover", allowDrop.bind(event));
-            CurrCell.addEventListener("drop", drop.bind(event));
+            currCell = cells[i];
+            currCell.addEventListener("mousedown", pressed.bind(this, currCell));
+            currCell.addEventListener("dragover", allowDrop.bind(event));
+            currCell.addEventListener("drop", drop.bind(event));
         }
 
-        // Click event for start button
+        // Sends start/end position to run program when start is clicked
         $('#start').on('click', function(){
             startPos = document.getElementById("startpos").parentNode.id;
             endPos = document.getElementById("endpos").parentNode.id; 
-
             socket.emit('start', {'start': startPos, 'end': endPos});
         })
 
@@ -1798,31 +1798,25 @@
 </script>
 
 <script>
-    var element = document.createElement('div');
     var elementID;
 
-    // Dragging boxes events
+    // Allows box to be dropped
     function allowDrop(event){
         event.preventDefault();
     }
 
+    // When starting to drag an image
     function dragStart(event, draggedID){
         elementID = draggedID;
-        console.log("dragStart " + draggedID);
-        console.log(event);
         event.dataTransfer.setData("text", null);
     }
 
+    // When dropping an image
     function drop(event){
         event.preventDefault();
-        console.log("drop");
-        console.log(event.target.getAttribute("id"));
         element = document.getElementById(elementID);
         event.target.appendChild(element);
-        
     }
-
 </script>
-
 
 {% endblock %}
