@@ -38,11 +38,12 @@ def updateBlock():
 def start_program(data):
     print('Started program', file=sys.stderr)
     print("startend" + data['start'] + data['end'])
-    
+    start = data['start'].split(":")
+    end = data['end'].split(":")
 
     main.initialize(60, 28)
-    main.setstart(50, 25)
-    main.setend(15,15)
+    main.setstart(int(start[1]), int(start[0]))
+    main.setend(int(end[1]) ,int(end[0]))
 
 
     visitedlist = main.calculateDistancesfrom()

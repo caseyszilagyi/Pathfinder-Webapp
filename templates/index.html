@@ -1789,7 +1789,7 @@
         // Click event for start button
         $('#start').on('click', function(){
             startPos = document.getElementById("startpos").parentNode.id;
-            endPos = document.getElementById("startpos").parentNode.id; 
+            endPos = document.getElementById("endpos").parentNode.id; 
 
             socket.emit('start', {'start': startPos, 'end': endPos});
         })
