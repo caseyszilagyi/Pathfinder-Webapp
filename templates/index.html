@@ -1755,6 +1755,18 @@
 </table>
 
 <script>
+
+    // Making it so that mouse can be held down for boxes rather than clicking
+    mouse = false;
+    var elementID;
+
+    // When starting to drag an image
+    function dragStart(event, draggedID){
+        elementID = draggedID;
+        event.dataTransfer.setData("text", null);
+        mouse = false;
+    }
+
     
     $(document).ready(function(){
         // Connecting to socket
@@ -1770,19 +1782,15 @@
             cellToChange.classList.add(data["type"]);
         })
 
-        // Changes to wall when cell is clicked
-        function pressed(cell){
-            socket.emit('make_wall', 
-            {'ID': cell.getAttribute("id"), 'type': "wall"} );
-        }
-
         // Binds pressed call (function above) for clicks on cells. Also implements
         // drag and drop event listeners
         var table = document.getElementById('grid');
         var cells = table.getElementsByTagName("td"); 
         for (var i = 0; i < cells.length; i++) { 
             currCell = cells[i];
-            currCell.addEventListener("mousedown", pressed.bind(this, currCell));
+            currCell.addEventListener("mousedown", press.bind(this, event, currCell));
+            currCell.addEventListener("mouseup", release.bind(event));
+            currCell.addEventListener("mouseover", mouseOver.bind(this, event, currCell));
             currCell.addEventListener("dragover", allowDrop.bind(event));
             currCell.addEventListener("drop", drop.bind(event));
         }
@@ -1794,29 +1802,53 @@
             socket.emit('start', {'start': startPos, 'end': endPos});
         })
 
+        
+
+        // Changes to wall when cell is clicked
+        function press(event, cell){
+            mouse = true;
+        }
+
+        function release(event){
+            mouse = false;
+        }
+
+        function mouseOver(event, cell){
+            if(mouse){
+                clickBox(event, cell);
+            }
+        }
+        
+        function clickBox(event, cell){
+            socket.emit('make_wall', 
+                    {'ID': cell.getAttribute("id"), 'type': "wall"} );
+        }
+        
+
+        //Drag and drop below
+        
+        // Allows box to be dropped
+        function allowDrop(event){
+            event.preventDefault();
+        }
+
+        // When dropping an image
+        function drop(event){
+            event.preventDefault();
+            element = document.getElementById(elementID);
+            event.target.appendChild(element);
+            release(event);
+        }
+
     })    
 </script>
 
 <script>
-    var elementID;
 
-    // Allows box to be dropped
-    function allowDrop(event){
-        event.preventDefault();
-    }
 
-    // When starting to drag an image
-    function dragStart(event, draggedID){
-        elementID = draggedID;
-        event.dataTransfer.setData("text", null);
-    }
-
-    // When dropping an image
-    function drop(event){
-        event.preventDefault();
-        element = document.getElementById(elementID);
-        event.target.appendChild(element);
-    }
+        
+        
+    
 </script>
 
 {% endblock %}
