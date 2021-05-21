@@ -1758,16 +1758,9 @@
 
     // Making it so that mouse can be held down for boxes rather than clicking
     mouse = false;
+    // ID used for drag and drop
     var elementID;
 
-    // When starting to drag an image
-    function dragStart(event, draggedID){
-        elementID = draggedID;
-        event.dataTransfer.setData("text", null);
-        mouse = false;
-    }
-
-    
     $(document).ready(function(){
         // Connecting to socket
         var socket = io.connect('http://127.0.0.1:5000');
@@ -1800,6 +1793,11 @@
             startPos = document.getElementById("startpos").parentNode.id;
             endPos = document.getElementById("endpos").parentNode.id; 
             socket.emit('start', {'start': startPos, 'end': endPos});
+        })
+
+        // Resets the program when the reset button is clicked
+        $('#reset').on('click', function(){
+            socket.emit('reset');
         })
 
         
@@ -1840,7 +1838,15 @@
             release(event);
         }
 
-    })    
+    })
+    
+    // When starting to drag an image
+    function dragStart(event, draggedID){
+        elementID = draggedID;
+        event.dataTransfer.setData("text", null);
+        mouse = false;
+    }
+
 </script>
 
 <script>

@@ -15,10 +15,12 @@ table {
 }
 
 td {
-    outline: 0.5px solid rgb(160, 160, 160);
+    outline: 0.25px solid rgb(199, 199, 199);
     width: 1.66%;
     height: 2%;
 }
+
+
 .unvisited{
     background: white;
 }
@@ -77,9 +79,11 @@ button {
 #startpos{
     width: 100%;
     height: auto;
+    display: block;
 }
 
 #endpos{
     width: 100%;
     height: auto;
+    display: block;
 }

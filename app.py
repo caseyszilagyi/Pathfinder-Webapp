@@ -72,6 +72,15 @@ def change_cell_coords(x, y, changeType):
 def change_cell(blockID, changeType):
     emit('change_cell', {'ID': blockID, 'type': changeType})
 
+
+@socketio.on('reset')
+def reset():
+    ## TODO: Implement resetting
+    print("reset")
+
+
+
+
 if __name__ == "__main__":
     socketio.run(app, debug=True)
 
