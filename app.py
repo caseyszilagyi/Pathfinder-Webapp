@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-
+main.initialize(60, 28)
 
 @app.route('/')
 def index():
@@ -67,6 +67,7 @@ def start_program(data):
         y = tile.gety()
 
         change_cell_coords(x,y,"path")
+        time.sleep(0.02)
 
 
 
@@ -76,10 +77,10 @@ def start_program(data):
 def change_cell_frontend(data):
     change_cell(data['ID'], data['type'])
     coordinates = data['ID'].split(':')
-    x = int(coordinates[1])
-    print("Wall X coord: ", x)
     y = int(coordinates[0])
-    print("Wall Y coord: ",y)
+    x = int(coordinates[1])
+    print(x)
+    print(y)
     main.create_wall(x,y)
 
 # Call this method to change the cell to a different type. Calls method below by converting coordinates to proper format

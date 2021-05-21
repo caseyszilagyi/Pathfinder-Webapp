@@ -130,5 +130,6 @@ def create_wall(x,y):
     for currenttile in tilelist:
         if (currenttile.getx() == x and currenttile.gety() == y):
             currenttile.setwall(True)
+            print("Current tile wall status: ", currenttile.getwall())
 
     return
