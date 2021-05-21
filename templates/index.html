@@ -1784,6 +1784,7 @@
             currCell.addEventListener("mousedown", press.bind(this, event, currCell));
             currCell.addEventListener("mouseup", release.bind(event));
             currCell.addEventListener("mouseover", mouseOver.bind(this, event, currCell));
+            currCell.addEventListener("click", clickBox.bind(this, event, currCell));
             currCell.addEventListener("dragover", allowDrop.bind(event));
             currCell.addEventListener("drop", drop.bind(event));
         }
