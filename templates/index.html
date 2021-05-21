@@ -941,7 +941,8 @@
             <td id="14:55" class="unvisited"></td>
             <td id="14:56" class="unvisited"></td>
             <td id="14:57" class="unvisited"></td>
-            <td id="14:58" class="unvisited"></td>
+            <td id="14:58" class="unvisited"><img src="{{ url_for('static', filename = 'images/end.png') }}" id="endpos" 
+                ondragstart = "dragStart(event, 'endpos')" draggable="true"></td>
             <td id="14:59" class="unvisited"></td>
         </tr>     
         <tr id="row15">
@@ -1787,7 +1788,10 @@
 
         // Click event for start button
         $('#start').on('click', function(){
-            socket.emit('start');
+            startPos = document.getElementById("startpos").parentNode.id;
+            endPos = document.getElementById("startpos").parentNode.id; 
+
+            socket.emit('start', {'start': startPos, 'end': endPos});
         })
 
     })    

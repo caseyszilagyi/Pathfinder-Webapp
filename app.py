@@ -33,10 +33,12 @@ def updateBlock():
 
 # Run when the start button is pressed
 @socketio.on('start')
-
 #def start_program(startx, starty, endx, endy):
-def start_program():
+
+def start_program(data):
     print('Started program', file=sys.stderr)
+    print("startend" + data['start'] + data['end'])
+    
 
     main.initialize(60, 28)
     main.setstart(50, 25)
@@ -68,7 +70,7 @@ def start_program():
 
 
 # Called from the front end to change a cell
-# Called by the front end to change cell to a wall
+# Called by the front end to change cell to aflask r wall
 @socketio.on('change_cell')
 def change_cell_frontend(data):
     change_cell(data['ID'], data['type'])
