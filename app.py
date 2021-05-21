@@ -54,6 +54,7 @@ def start_program(data):
     while currentdistancevisited < finaldistance:
 
         for tile in visitedlist:
+            
             if tile.getdistance() == currentdistancevisited:
                 x = tile.getx()
                 y = tile.gety()
@@ -61,7 +62,7 @@ def start_program(data):
                 change_cell_coords(x,y,"visited")
         currentdistancevisited += 1
         time.sleep(0.1)
-
+    print("test")
     for tile in pathlist:
         x = tile.getx()
         y = tile.gety()
