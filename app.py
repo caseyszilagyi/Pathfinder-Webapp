@@ -41,7 +41,6 @@ def start_program(data):
     start = data['start'].split(":")
     end = data['end'].split(":")
 
-    main.initialize(60, 28)
     main.setstart(int(start[1]), int(start[0]))
     main.setend(int(end[1]) ,int(end[0]))
 
