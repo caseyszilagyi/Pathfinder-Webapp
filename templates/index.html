@@ -883,8 +883,9 @@
         </tr>  
         <tr id="row14">
             <td id="14:0" class="unvisited"></td>
-            <td id="14:1" class="unvisited"><img src="{{ url_for('static', filename = 'images/start.jpg') }}" id="startpos" 
-                ondragstart = "dragStart(event, 'startpos')" draggable="true"></td>
+            <td id="14:1" class="unvisited"><div class="pos" id="startpos" 
+                ondragstart = "dragStart(event, 'startpos')" draggable="true">
+                <img src="{{ url_for('static', filename = 'images/start.png') }}" id="endimg"></div></td>
             <td id="14:2" class="unvisited"></td>
             <td id="14:3" class="unvisited"></td>
             <td id="14:4" class="unvisited"></td>
@@ -941,8 +942,9 @@
             <td id="14:55" class="unvisited"></td>
             <td id="14:56" class="unvisited"></td>
             <td id="14:57" class="unvisited"></td>
-            <td id="14:58" class="unvisited"><img src="{{ url_for('static', filename = 'images/end.png') }}" id="endpos" 
-                ondragstart = "dragStart(event, 'endpos')" draggable="true"></td>
+            <td id="14:58" class="unvisited"><div class="pos" id="endpos" 
+                ondragstart = "dragStart(event, 'endpos')" draggable="true">
+                <img src="{{ url_for('static', filename = 'images/end.png') }}" id = "endimg"></div></td>
             <td id="14:59" class="unvisited"></td>
         </tr>     
         <tr id="row15">
