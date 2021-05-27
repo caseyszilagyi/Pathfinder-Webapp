@@ -45,12 +45,12 @@ def getDijkstraPathTo():
 
     pathlist = []
 
+    pathlist.append(endtile)
 
     while temp.getprev() != None:
         prev = temp.getprev()
         pathlist.append(prev)
         temp = prev
-
 
     list.reverse(pathlist)
 
@@ -133,3 +133,14 @@ def create_wall(x,y):
             print("Current tile wall status: ", currenttile.getwall())
 
     return
+
+def reset():
+
+    global endtile
+    global starttile
+    global tilelist
+
+    endtile = None
+    starttile = None
+    tilelist = []
+    initialize(60, 28)

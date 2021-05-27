@@ -32,7 +32,7 @@ def start_program(data):
 
     currentdistancevisited = 0
 
-    while currentdistancevisited < finaldistance:
+    while currentdistancevisited < finaldistance+1:
 
         for tile in visitedlist:
             
@@ -76,8 +76,11 @@ def change_cell(blockID, changeType):
 @socketio.on('reset')
 def reset():
     ## TODO: Implement resetting
+    main.reset()
+    for x in range(60):
+        for y in range(28):
+            change_cell_coords(x,y,"unvisited")
     print("reset")
-
 
 
 
