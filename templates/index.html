@@ -1766,13 +1766,16 @@
     $(document).ready(function(){
         // Connecting to socket
 
+        /*
         var express = require('express'),
             app = express();
             server = require('http').createServer(app);
             io = require('socket.io').listen(server);
 
         server.listen(process.env.PORT || 3000);
+*/
 
+        var socket = io.connect("http://" + document.domain + ':' + location.port);
         // var socket = io.connect('https://still-wave-76385.herokuapp.com/');
         io.socket.on('connection', function(){
             socket.send('User has connected');
