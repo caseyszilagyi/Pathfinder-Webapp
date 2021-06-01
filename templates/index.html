@@ -1765,7 +1765,7 @@
 
     $(document).ready(function(){
         // Connecting to socket
-        var socket = io.connect('http://127.0.0.1:5000');
+        var socket = io.connect('https://still-wave-76385.herokuapp.com/');
         socket.on('connect', function(){
             socket.send('User has connected');
         })
