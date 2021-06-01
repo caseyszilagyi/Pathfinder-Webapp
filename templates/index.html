@@ -1774,7 +1774,7 @@
         server.listen(process.env.PORT || 3000);
 
         // var socket = io.connect('https://still-wave-76385.herokuapp.com/');
-        socket.on('connect', function(){
+        io.socket.on('connection', function(){
             socket.send('User has connected');
         })
 
