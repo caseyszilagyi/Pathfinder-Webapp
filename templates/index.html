@@ -1765,10 +1765,21 @@
 
     $(document).ready(function(){
         // Connecting to socket
-        var socket = io.connect('https://still-wave-76385.herokuapp.com/');
+
+        var express = require('express'),
+            app = express();
+            server = require('http').createServer(app);
+            io = require('socket.io').listen(server);
+
+        server.listen(process.env.PORT || 3000);
+
+        // var socket = io.connect('https://still-wave-76385.herokuapp.com/');
         socket.on('connect', function(){
             socket.send('User has connected');
         })
+
+
+
 
         // Listener for cell change calls
         socket.on('change_cell', function(data) {
