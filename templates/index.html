@@ -1775,8 +1775,8 @@
         server.listen(process.env.PORT || 3000);
 */
 
-        import express from 'express';
-        //var express = require('express');
+            /*
+        var express = require('express');
         var app = express();
         var http = require('http').createServer(app);
         var io = require('socket.io')(http);
@@ -1786,6 +1786,7 @@
         http.listen(PORT,function(){
             console.log("Listening to port " + PORT);
         });
+        */
 
        //var socket = io.connect("https://" + document.domain);
         var socket = io("https://" + document.domain);
