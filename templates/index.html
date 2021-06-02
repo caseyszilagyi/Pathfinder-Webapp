@@ -1775,8 +1775,8 @@
         server.listen(process.env.PORT || 3000);
 */
 
-        var socket = io.connect("https://" + document.domain);
-        //var socket = io("https://" + document.domain + ':' + location.port);
+        //var socket = io.connect("https://" + document.domain);
+        var socket = io("https://" + document.domain + ':' + location.port);
 
 
         // var socket = io.connect('https://still-wave-76385.herokuapp.com/');
