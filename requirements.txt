@@ -5,6 +5,8 @@ gunicorn==20.1.0
 itsdangerous==2.0.0
 Jinja2==3.0.0
 MarkupSafe==2.0.0
+nodejs==0.1.1
+optional-django==0.1.0
 python-engineio==3.13.2
 python-socketio==4.6.0
 six==1.16.0
