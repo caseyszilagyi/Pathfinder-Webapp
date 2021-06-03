@@ -1783,6 +1783,7 @@
 
         // var socket = io.connect('https://still-wave-76385.herokuapp.com/');
         socket.on('connect', function(){
+            console.log("heyo");
             socket.send('User has connected' + document.domain + ":" + location.port);
         })
 
