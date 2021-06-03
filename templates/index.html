@@ -1775,7 +1775,7 @@
         server.listen(process.env.PORT || 3000);
 */
 
-            /*
+            
         var express = require('express');
         var app = express();
         var http = require('http').createServer(app);
@@ -1786,10 +1786,9 @@
         http.listen(PORT,function(){
             console.log("Listening to port " + PORT);
         });
-        */
 
        //var socket = io.connect("https://" + document.domain);
-        var socket = io("https://" + document.domain + "/");
+        var socket = io("https://" + document.domain);
 
 
         // var socket = io.connect('https://still-wave-76385.herokuapp.com/');
