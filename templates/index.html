@@ -885,7 +885,7 @@
             <td id="14:0" class="unvisited"></td>
             <td id="14:1" class="unvisited"><div class="pos" id="startpos" 
                 ondragstart = "dragStart(event, 'startpos')" draggable="true">
-                <img src="{{ url_for('static', filename = 'images/start.png') }}" id="endimg"></div></td>
+                <img src="{{ url_for('static', filename = 'images/start.png') }}" id="startimg"></div></td>
             <td id="14:2" class="unvisited"></td>
             <td id="14:3" class="unvisited"></td>
             <td id="14:4" class="unvisited"></td>
@@ -1760,35 +1760,21 @@
 
     // Making it so that mouse can be held down for boxes rather than clicking
     mouse = false;
+    
     // ID used for drag and drop
     var elementID;
 
     $(document).ready(function(){
+
         // Connecting to socket
-
-        /*
-        var express = require('express'),
-            app = express();
-            server = require('http').createServer(app);
-            io = require('socket.io').listen(server);
-
-        server.listen(process.env.PORT || 3000);
-*/
-
-            
-    
-       //var socket = io.connect("https://" + document.domain);
         var socket = io("https://" + document.domain);
-
-
-        // var socket = io.connect('https://still-wave-76385.herokuapp.com/');
         socket.on('connect', function(){
-            console.log("heyo");
-            socket.send('User has connected' + document.domain + ":" + location.port);
+            console.log("heyo");            socket.send('User has connected' + document.domain + ":" + location.port);
         })
 
-
-
+        socket.on('disconnect', function(){
+            socket.emit('reset');
+        })
 
         // Listener for cell change calls
         socket.on('change_cell', function(data) {
@@ -1826,20 +1812,24 @@
         
 
         // Changes to wall when cell is clicked
+        // When mouse is down
         function press(event, cell){
             mouse = true;
         }
 
+        // When mouse is up
         function release(event){
             mouse = false;
         }
 
+        // When mouse is over and down, clicks the box
         function mouseOver(event, cell){
             if(mouse){
                 clickBox(event, cell);
             }
         }
         
+        // Makes wall when box is clicked
         function clickBox(event, cell){
             socket.emit('make_wall', 
                     {'ID': cell.getAttribute("id"), 'type': "wall"} );
@@ -1870,14 +1860,6 @@
         mouse = false;
     }
 
-</script>
-
-<script>
-
-
-        
-        
-    
 </script>
 
 {% endblock %}
