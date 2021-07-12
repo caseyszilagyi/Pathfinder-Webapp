@@ -5,12 +5,16 @@ import main
 import tile
 import logging
 import time
+import sys
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 socketio = SocketIO(app)
 
 main.initialize(60, 28)
+
+#resetting instance variable to break out of start_program
+resetting = False
 
 # Loads the starting page
 @app.route('/')
@@ -32,10 +36,15 @@ def start_program(data):
 
     currentdistancevisited = 0
 
+
     while currentdistancevisited < finaldistance+1:
 
+        if resetting == True:
+
+            exit()
+
         for tile in visitedlist:
-            
+
             if tile.getdistance() == currentdistancevisited:
                 x = tile.getx()
                 y = tile.gety()
@@ -76,11 +85,16 @@ def change_cell(blockID, changeType):
 @socketio.on('reset')
 def reset():
     ## TODO: Implement resetting
+
+    global resetting
+
+    resetting = True
     main.reset()
     for x in range(60):
         for y in range(28):
             change_cell_coords(x,y,"unvisited")
     print("reset")
+    resetting = False
 
 
 
@@ -92,4 +106,3 @@ def set_end(x,y):
 
 def set_start(x,y):
     setend(x,y)
-
